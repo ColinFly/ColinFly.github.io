@@ -7,7 +7,7 @@
 
     
 
-    <title>Ubuntu 14.04 Hexo博客使用文档 | Be better,not the same!</title>
+    <title>Service与Activity通信 | Be better,not the same!</title>
     <meta name="author" content="Colin">
     
     <meta name="description" content="Android Programer">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="Ubuntu 14.04 Hexo博客使用文档"/>
+    <meta property="og:title" content="Service与Activity通信"/>
     <meta property="og:site_name" content="腐草为萤"/>
 
     
@@ -199,72 +199,53 @@
             <div class="article-title">
                 
     
-        <h1>Ubuntu 14.04 Hexo博客使用文档</h1>
+        <h1>Service与Activity通信</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2016-06-01T02:15:39.000Z"><a href="/2016/06/01/Hexo博客使用文档/">2016-06-01</a></time>
+            <time class="pink-link-context" datetime="2016-06-14T01:54:17.000Z"><a href="/2016/06/14/Service与Activity通信/">2016-06-14</a></time>
 
             
     <div class="tags-row">
         
-            <a href="/tags/Hexo/" class="chip pink lighten-1">Hexo</a>
+            <a href="/tags/Service/" class="chip pink lighten-1">Service</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1-注册Github-创建Repository"><span class="section table-of-contents-text">1.注册Github,创建Repository</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2-生成ssh密钥"><span class="section table-of-contents-text">2.生成ssh密钥</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3-初始化自己的博客"><span class="section table-of-contents-text">3.初始化自己的博客</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#4-配置主题"><span class="section table-of-contents-text">4.配置主题</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#5-部署博客到Github上"><span class="section table-of-contents-text">5.部署博客到Github上</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#6-hexo常用命令"><span class="section table-of-contents-text">6.hexo常用命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#7-常见问题"><span class="section table-of-contents-text">7.常见问题</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#8-参考链接"><span class="section table-of-contents-text">8.参考链接</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#主要方法"><span class="section table-of-contents-text">主要方法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#bindService使用细节"><span class="section table-of-contents-text">bindService使用细节</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#startService使用细节"><span class="section table-of-contents-text">startService使用细节</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#最后"><span class="section table-of-contents-text">最后</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <blockquote>
-<p>Hexo简介</p>
-</blockquote>
-<p>hexo是一个基于Node.js的静态博客程序,可以方便的生成静态网页托管在Github上</p>
-<blockquote>
-<p>使用环境</p>
-</blockquote>
-<ul>
-<li>Ubuntu 14.04</li>
-<li>Node.js  v6.0.0</li>
-<li>Npm 3.8.6     </li>
+                <h4 id="主要方法"><a href="#主要方法" class="headerlink" title="主要方法"></a>主要方法</h4><ul>
+<li>1.<code>bindService</code></li>
 </ul>
-<blockquote>
-<p>搭建步骤</p>
-</blockquote>
+<p>启动的服务可以得到一个Service的一个对象实例，然后我们就可以访问Service中的方法,停止服务使用<code>unbindService</code></p>
 <ul>
-<li>注册github账号,创建一个yourname.github.io的仓库</li>
-<li>买个喜欢的域名(阿里云:<a href="https://wanwang.aliyun.com" target="_blank" rel="external">https://wanwang.aliyun.com</a>)</li>
-<li>下载Node.js、Git(网上教程一大把)</li>
-<li>安装<code>Hexo npm install -g hexo</code></li>
-<li>生成ssh密钥</li>
-<li>配置主题</li>
-<li>部署到Github上</li>
+<li>2.<code>startService</code></li>
 </ul>
-<blockquote>
-<p>关键部分详细步骤</p>
-</blockquote>
-<h4 id="1-注册Github-创建Repository"><a href="#1-注册Github-创建Repository" class="headerlink" title="1.注册Github,创建Repository"></a>1.注册Github,创建Repository</h4><p>Repositories中创建一个以自己用户名+”.github.io”创建的repository（仓库）,记住要与用户名一致!然后再本地创建blog文件夹执行<code>git clone  你的仓库地址</code></p>
-<h4 id="2-生成ssh密钥"><a href="#2-生成ssh密钥" class="headerlink" title="2.生成ssh密钥"></a>2.生成ssh密钥</h4><p>2.1 进入~/.ssh文件夹是否存在</p>
-<p>2.2 生成 ssh 密钥:<code>$ ssh-keygen -t rsa -C “your email address”</code></p>
-<p>连续按3个回车（密码默认为空），得到 <code>id_rsa</code>和<code>id_rsa.pub</code> 文件，说明生成成功</p>
-<p>2.3添加密钥到 Github</p>
-<p>打开 Github，登录自己的账号后<br>点击自己的头像-&gt;settings-&gt;SSH Keys-&gt;Add SSH key<br>将本地 <code>id_rsa.pub</code> 中的内容粘贴到 Key 文本框中，随意输入一个 title，点击 Add Key 即可</p>
-<p>2.4测试是否成功:<code>ssh git@github.com</code><br>这样子就是成功了^,^~</p>
-<h4 id="3-初始化自己的博客"><a href="#3-初始化自己的博客" class="headerlink" title="3.初始化自己的博客"></a>3.初始化自己的博客</h4><p>3.1进入之前创建的blog文件夹,执行命令<code>hexo init</code>这样博客框架就完成了</p>
-<p>3.2执行命令<code>hexo generate</code> ,<code>hexo server</code><br> 后本地服务器就开启了,这时候就可以在浏览器中已localhost:4000访问到了</p>
-<h4 id="4-配置主题"><a href="#4-配置主题" class="headerlink" title="4.配置主题"></a>4.配置主题</h4><p>到网上找一个喜欢的主题克隆到本地文件夹,然后扔到theme文件夹,更改_config.yml中的theme: 你的主题名称</p>
-<h4 id="5-部署博客到Github上"><a href="#5-部署博客到Github上" class="headerlink" title="5.部署博客到Github上"></a>5.部署博客到Github上</h4><p>在_config.yml最后一行加入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/ColinFly/ColinFly.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>执行命令<code>hexo g</code>进行部署，再执行命令<code>hexo d</code>进行发布，发布成功后，在浏览器中输入你Github的二级域名，如：<a href="https://colinfly.github.io" target="_blank" rel="external">https://colinfly.github.io</a> 就可以看到你发布的网站了，不过如果想通过你申请的一级域名来访问的话还需要在你的blog的source目录下新建CNAME文件，里面输入你的域名地址，再进行部署及发布就行。<br>每次部署的步骤，可按以下三步来进行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></p>
-<h4 id="6-hexo常用命令"><a href="#6-hexo常用命令" class="headerlink" title="6.hexo常用命令"></a>6.hexo常用命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo new&quot;postName&quot; #新建文章</span><br><span class="line">hexo new page&quot;pageName&quot; #新建页面</span><br><span class="line">hexo generate #生成静态页面至public目录</span><br><span class="line">hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</span><br><span class="line">hexo deploy #将.deploy目录部署到GitHub</span><br><span class="line">hexo help # 查看帮助</span><br><span class="line">hexo version #查看Hexo的版本</span><br></pre></td></tr></table></figure>
-<p>简写:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n == hexo new</span><br><span class="line">hexo g == hexo generate</span><br><span class="line">hexo s == hexo server</span><br><span class="line">hexo d == hexo deploy</span><br></pre></td></tr></table></figure>
-<h4 id="7-常见问题"><a href="#7-常见问题" class="headerlink" title="7.常见问题"></a>7.常见问题</h4><p>1.<code>ERROR Deployer not found: git 或者 ERROR Deployer not found: github</code>，执行命令<code>npm install hexo-deployer-git --save</code>；<br>2.<code>ERROR Plugin load failed: hexo-server</code>，执行命令：<code>sudo npm install hexo-server</code></p>
-<h4 id="8-参考链接"><a href="#8-参考链接" class="headerlink" title="8.参考链接"></a>8.参考链接</h4><p>搭建Hexo博客中碰到的坑:<a href="http://www.jianshu.com/p/a2fe56d11c4f" target="_blank" rel="external">http://www.jianshu.com/p/a2fe56d11c4f</a><br>通过Hexo在Github上搭建博客教程<a href="http://www.jianshu.com/p/858ecf233db9" target="_blank" rel="external">http://www.jianshu.com/p/858ecf233db9</a></p>
+<p>启动一个服务执行后台任务，可以用广播的方式返回数据。停止服务使用stopService</p>
+<h4 id="bindService使用细节"><a href="#bindService使用细节" class="headerlink" title="bindService使用细节"></a>bindService使用细节</h4><ol>
+<li>写一个<code>MyService extends Service</code></li>
+<li>通过<code>Binder</code>来获取<code>MyService</code></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        return new MsgBinder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 通过Binder对象,当Activity通过调用bindService(Intent service, ServiceConnection conn,int flags),</span><br><span class="line">     * 我们可以得到一个Service的一个对象实例，然后我们就可以访问Service中的方法</span><br><span class="line">     */</span><br><span class="line">    public class MsgBinder extends Binder &#123;</span><br><span class="line">        public MsgService getService() &#123;</span><br><span class="line">            return MsgService.this;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在Activity中绑定Service并访问Service的方法</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">case R.id.btn_bind_service:</span><br><span class="line">               Intent intent = new Intent(mContext,MsgService.class);</span><br><span class="line">               bindService(intent, connection, Context.BIND_AUTO_CREATE);</span><br><span class="line">               break;</span><br><span class="line">case R.id.btn_download_start:</span><br><span class="line">               //开始下载</span><br><span class="line">               mMsgService.startDownLoad();</span><br><span class="line">               //通过接口回调更新进度</span><br><span class="line">               mMsgService.setListener(new MsgService.ProgressChangeListener() &#123;</span><br><span class="line">                   @Override</span><br><span class="line">                   public void onChanged(int progress) &#123;</span><br><span class="line">                       mProgressBar.setProgress(progress);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;);</span><br><span class="line">//Service连接的回调接口实现</span><br><span class="line">   ServiceConnection connection=new ServiceConnection() &#123;</span><br><span class="line">       @Override</span><br><span class="line">       public void onServiceConnected(ComponentName name, IBinder service) &#123;</span><br><span class="line">           //通过binder拿到service对象</span><br><span class="line">           mMsgService = ((MsgService.MsgBinder) service).getService();</span><br><span class="line">           Logger.i(&quot;onServiceConnected&quot;);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       @Override</span><br><span class="line">       public void onServiceDisconnected(ComponentName name) &#123;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="startService使用细节"><a href="#startService使用细节" class="headerlink" title="startService使用细节"></a>startService使用细节</h4><p>1.<code>MsgService2 extends Service</code></p>
+<p>2.不管onBind,重写<code>onStartCommand</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">@Override</span><br><span class="line">public int onStartCommand(Intent intent, int flags, int startId) &#123;</span><br><span class="line">        startDownLoad();</span><br><span class="line">        return super.onStartCommand(intent, flags, startId);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>3.在清单注册Service,注意这时的Service必须带intent-filter,相当于id<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;service android:name=&quot;.service.MsgService2&quot;  &gt;</span><br><span class="line">            &lt;!--这个就是Service的Id了--&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=&quot;com.colin.demo.service.Service2&quot; /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">&lt;/service&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4.在Activity中使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> case R.id.btn_register_broadcast:</span><br><span class="line">                //通过Action过滤Service</span><br><span class="line">                mMsgReceiver=new MsgReceiver();</span><br><span class="line">                registerReceiver(mMsgReceiver, new IntentFilter(&quot;com.colin.demo.service.Service2&quot;));</span><br><span class="line">                Logger.i(&quot;已注册广播接收器&quot;);</span><br><span class="line">                break;</span><br><span class="line">case R.id.btn_start_service:</span><br><span class="line">                //启动service</span><br><span class="line">                mIntent = new Intent(&quot;com.colin.demo.service.Service2&quot;);</span><br><span class="line">                startService(mIntent);</span><br><span class="line">                break;</span><br><span class="line"> /**</span><br><span class="line">     * 广播接收器</span><br><span class="line">     * @author len</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line">    public class MsgReceiver extends BroadcastReceiver &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">            //拿到进度，更新UI</span><br><span class="line">            int progress = intent.getIntExtra(&quot;progress&quot;, 0);</span><br><span class="line">            Logger.i(&quot;拿到进度，更新UI  &quot;);</span><br><span class="line">            mProgressBar.setProgress(progress);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>1.记得干掉服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    protected void onDestroy() &#123;</span><br><span class="line">        //销毁服务</span><br><span class="line">        unbindService(connection);</span><br><span class="line"></span><br><span class="line">        //停止服务</span><br><span class="line">        stopService(mIntent);</span><br><span class="line">        //注销广播</span><br><span class="line">        unregisterReceiver(mMsgReceiver);</span><br><span class="line">        super.onDestroy();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>2.<code>service</code>和<code>Activity</code>一样要在清单里面注册</p>
+<p>3.复习一下广播的静态注册和动态注册<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">private Intent intent = new Intent(&quot;com.colin.demo.service.Service2&quot;);</span><br><span class="line">intent.putExtra(&quot;progress&quot;, progress);</span><br><span class="line">sendBroadcast(intent);//代表发送某一频率的广播</span><br></pre></td></tr></table></figure></p>
 
             </div>
         </div>
